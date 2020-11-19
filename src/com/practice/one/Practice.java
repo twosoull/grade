@@ -5,22 +5,20 @@ import java.util.Scanner;
 public class Practice {
 	public static void main(String[] args) {
 		
-		
-		int[] grade = new int[3*3]; 
+		Exam exam = new Exam();
 		boolean on = true; 
-		int[] totallist= new int[3];
-		float[] avg= new float[3];
+		
 		int num;
 		while(on) {
-			num = menuSystem();
+			num = menuSystem(exam);
 			switch(num) {
 			
 			case 1:
 				
-			inputExam(grade);
+			inputExam(exam);
 			break;
 			case 2:
-				outputExam(totallist,avg,grade);
+				outputExam(exam);
 				//성적출력
 				break;
 			case 3:
@@ -32,7 +30,7 @@ public class Practice {
 		}
 		
 	}
-	static int menuSystem() {
+	static int menuSystem(Exam exam) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("성적관리 시스템메뉴");
 		System.out.println("\t1.성적입력");
@@ -43,9 +41,12 @@ public class Practice {
 		int num = sc.nextInt();
 		return num;
 	}
-	static void outputExam(int[]total,float[]avg,int[]grade) {
+	static void outputExam(Exam exam) {
 		System.out.println("===================");
 		System.out.println("성적 출력");
+		int[] grade = exam.grade;
+		int[] total = exam.total;
+		float[] avg = exam.avg;
 		for(int j=0; j<3; j++) {
 			for(int i=0; i<3; i++){
 			System.out.printf("%d국어%3d: %3d\n",j+1,i+1,grade[3*j+i]);
@@ -59,7 +60,8 @@ public class Practice {
 		
 		
 	}
-	static void inputExam(int[]grade) {
+	static void inputExam(Exam exam) {
+		int[] grade = exam.grade;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("===================");
 		System.out.println("성적 입력");
