@@ -3,60 +3,73 @@ package com.practice.one;
 import java.util.Scanner;
 
 public class Practice {
-	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 		
-	
+		
+		int[] grade = new int[3*3]; 
 		boolean on = true; 
-		int kor = 0 ;
-		int eng = 0 ;
-		int math = 0;
-		int total;
-		float avg;
-		
+		int[] totallist= new int[3];
+		float[] avg= new float[3];
+		int num;
 		while(on) {
-			System.out.println("¼ºÀû°ü¸® ½Ã½ºÅÛ¸Ş´º");
-			System.out.println("\t1.¼ºÀûÀÔ·Â");
-			System.out.println("\t2.¼ºÀûÃâ·Â");
-			System.out.println("\t3.Á¾·á");
-			System.out.println("¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
-			
-			int num = sc.nextInt();
+			num = menuSystem();
 			switch(num) {
 			
 			case 1:
-				System.out.println("===================");
-				System.out.println("¼ºÀû ÀÔ·Â");
-				System.out.println("±¹¾î¼ºÀû:");
-				kor = sc.nextInt();
-				System.out.println("¿µ¾î¼ºÀû:");
-				eng = sc.nextInt();
-				System.out.println("¼öÇĞ¼ºÀû:");
-				math = sc.nextInt();
 				
-				break;
-				
+			inputExam(grade);
+			break;
 			case 2:
-				System.out.println("===================");
-				System.out.println("¼ºÀû Ãâ·Â");
-				System.out.printf("±¹¾î: %d\n", kor );
-				System.out.printf("¿µ¾î: %d\n", eng);
-				System.out.printf("¼öÇĞ : %d\n", math);
-				total = kor+eng+math;
-				avg = (float)(total / 3.0);
-				System.out.printf("ÇÕ°è: %d\n",total);
-				System.out.printf("Æò±Õ: %5.2f\n",avg);
-				
-				//¼ºÀûÃâ·Â
+				outputExam(totallist,avg,grade);
+				//ì„±ì ì¶œë ¥
 				break;
 			case 3:
-				//Á¾·á
-				System.out.println("Á¾·áµÇ¾ú½À´Ï´Ù");
+				//ì¢…ë£Œ
+				System.out.println("ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤");
 				on = false;
 				break;
 			}
 		}
+		
+	}
+	static int menuSystem() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("ì„±ì ê´€ë¦¬ ì‹œìŠ¤í…œë©”ë‰´");
+		System.out.println("\t1.ì„±ì ì…ë ¥");
+		System.out.println("\t2.ì„±ì ì¶œë ¥");
+		System.out.println("\t3.ì¢…ë£Œ");
+		System.out.println("ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+		
+		int num = sc.nextInt();
+		return num;
+	}
+	static void outputExam(int[]total,float[]avg,int[]grade) {
+		System.out.println("===================");
+		System.out.println("ì„±ì  ì¶œë ¥");
+		for(int j=0; j<3; j++) {
+			for(int i=0; i<3; i++){
+			System.out.printf("%dêµ­ì–´%3d: %3d\n",j+1,i+1,grade[3*j+i]);
+			
+			total[j] += + grade[3*j+i];
+			avg[j] = (float)(total[j] / 3.0);
+			}
+			System.out.printf("í•©ê³„: %d\n",total[j]);
+			System.out.printf("í‰ê· : %5.2f\n",avg[j]);
+		}
+		
+		
+	}
+	static void inputExam(int[]grade) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("===================");
+		System.out.println("ì„±ì  ì…ë ¥");
+		for(int j=0; j<3; j++) {
+			for(int i =0; i<3; i++) {
+			System.out.printf("%dí•™ë…„êµ­ì–´%3dì„±ì :",j+1,i+1);
+			grade[3*j+i] = sc.nextInt();
+			}
+		}
+	
 		
 	}
 }
